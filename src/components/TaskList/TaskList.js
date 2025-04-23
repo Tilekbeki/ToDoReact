@@ -15,6 +15,7 @@ const TaskList = ({ todos, onToggleComplete, onToggleEdit, onDelete }) => {
       <li key={id} className={classStyled || null}>
         <Task
           id={id}
+          status={isCompleted}
           descr={descr}
           onToggleComplete={onToggleComplete}
           onToggleEdit={onToggleEdit}

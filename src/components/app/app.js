@@ -20,12 +20,15 @@ const App = () => {
       date: new Date(),
     },
   ]);
+  const [displayData, setDisplayData] = useState(todoData);
+  const [count, setCount] = useState(todoData.length);
   const toggleProperty = (arr, id, propName) => {
     console.log(arr, id, propName);
     let copy = todoData.map((el) =>
       el.id === id ? { ...el, [propName]: !el[propName] } : el
     );
     setTodoData(copy);
+    setDisplayData(copy);
   };
   const onToggleComplete = (id) => {
     toggleProperty([1], id, "isCompleted");
@@ -37,19 +40,48 @@ const App = () => {
   const onDelete = (id) => {
     let copy = todoData.filter((el) => el.id !== id);
     setTodoData(copy);
+    setDisplayData(copy);
+  };
+  const onAdd = (newItem) => {
+    let copy = todoData;
+    setTodoData([...copy, newItem]);
+    setDisplayData([...copy, newItem]);
+  };
+  const Counter = (arr) => {
+    setCount(arr.length);
+    console.log(arr.length);
+  };
+  const onToggleFilter = (category) => {
+    if (category === "all") {
+      setDisplayData(todoData);
+      Counter(todoData);
+      return;
+    }
+    const isCompleted = category === "done";
+    setDisplayData(todoData.filter((el) => el.isCompleted === isCompleted));
+    Counter(todoData.filter((el) => el.isCompleted === isCompleted));
+  };
+  const onDeleteByCompleted = () => {
+    let copy = todoData.filter((el) => !el.isCompleted);
+    setTodoData(copy);
+    setDisplayData(copy);
   };
   return (
     <div className="todoapp">
-      <AppHeader toDo={1} done={3} />
+      <AppHeader toDo={1} done={3} onAdd={onAdd} />
       <main>
         <TaskList
           onDelete={onDelete}
-          todos={todoData}
+          todos={displayData}
           onToggleComplete={onToggleComplete}
           onToggleEdit={onToggleEdit}
         />
       </main>
-      <Footer />
+      <Footer
+        count={count}
+        onDeleteByCompleted={onDeleteByCompleted}
+        onToggleFilter={onToggleFilter}
+      />
     </div>
   );
 };
