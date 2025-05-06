@@ -1,30 +1,48 @@
-import "./Task.css";
+import { formatDistanceToNowStrict } from 'date-fns';
+import PropTypes from 'prop-types';
+import './Task.css';
 
-const Task = (props) => {
-  const { id, descr, status, onToggleComplete, onToggleEdit, onDelete } = props;
+function Task(props) {
+  const {
+    id, descr, status, onToggleComplete, onToggleEdit, onDelete, date,
+  } = props;
 
   return (
     <div className="view">
       <input
         className="toggle"
         type="checkbox"
-        checked={status || false}
+        defaultChecked={status || false}
         onClick={() => onToggleComplete(id)}
       />
       <label>
         <span className="description">{descr}</span>
-        <span className="created">created 5 minutes ago</span>
+        <span className="created">
+          created
+          {' '}
+          {formatDistanceToNowStrict(date, new Date(), {
+            addSuffix: true,
+          })}
+          {' '}
+          ago
+        </span>
       </label>
       <button
         className="icon icon-edit"
         onClick={() => onToggleEdit(id)}
-      ></button>
+      />
       <button
         className="icon icon-destroy"
         onClick={() => onDelete(id)}
-      ></button>
+      />
     </div>
   );
+}
+Task.propTypes = {
+  id: PropTypes.number.isRequired,
+  descr: PropTypes.string.isRequired,
+  isCompleted: PropTypes.bool.isRequired,
+  onToggleComplete: PropTypes.func,
+  onDelete: PropTypes.func.isRequired,
 };
-
 export default Task;

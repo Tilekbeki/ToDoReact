@@ -1,9 +1,10 @@
-import { useState } from "react";
-import "./SearchPanel.css";
-const SearchPanel = ({ onAdd }) => {
-  const [userInput, setUserInput] = useState("");
+import { useState } from 'react';
+import './SearchPanel.css';
+
+function SearchPanel({ onAdd }) {
+  const [userInput, setUserInput] = useState('');
   const handleKeyPress = (event) => {
-    if (event.key === "Enter") {
+    if (event.key === 'Enter') {
       onAdd({
         id: 3,
         descr: event.target.value,
@@ -11,7 +12,7 @@ const SearchPanel = ({ onAdd }) => {
         isCompleted: false,
         date: new Date(),
       });
-      setUserInput("");
+      setUserInput('');
     }
   };
   return (
@@ -24,5 +25,5 @@ const SearchPanel = ({ onAdd }) => {
       value={userInput}
     />
   );
-};
+}
 export default SearchPanel;
