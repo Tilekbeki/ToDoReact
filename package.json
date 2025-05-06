@@ -30,9 +30,9 @@
     }
   },
   "lint-staged": {
-    "*.(js|jsx)": [
-      "npm run lint:fix",
-      "git add"
+    "src/**/*.{js,jsx}": [
+      "eslint --fix",
+      "prettier --write"
     ]
   },
   "eslintConfig": {
