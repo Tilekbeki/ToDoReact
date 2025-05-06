@@ -1,8 +1,8 @@
-import { useState } from 'react';
-import './SearchPanel.css';
+import { useState } from 'react'
+import './SearchPanel.css'
 
 function SearchPanel({ onAdd }) {
-  const [userInput, setUserInput] = useState('');
+  const [userInput, setUserInput] = useState('')
   const handleKeyPress = (event) => {
     if (event.key === 'Enter') {
       onAdd({
@@ -11,10 +11,10 @@ function SearchPanel({ onAdd }) {
         isEditing: false,
         isCompleted: false,
         date: new Date(),
-      });
-      setUserInput('');
+      })
+      setUserInput('')
     }
-  };
+  }
   return (
     <input
       className="new-todo"
@@ -24,6 +24,6 @@ function SearchPanel({ onAdd }) {
       onChange={(e) => setUserInput(e.target.value)}
       value={userInput}
     />
-  );
+  )
 }
-export default SearchPanel;
+export default SearchPanel

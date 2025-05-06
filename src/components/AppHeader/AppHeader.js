@@ -1,5 +1,5 @@
-import SearchPanel from '../SearchPanel/SearchPanel';
-import './AppHeader.css';
+import SearchPanel from '../SearchPanel/SearchPanel'
+import './AppHeader.css'
 
 function AppHeader({ onAdd }) {
   return (
@@ -7,7 +7,7 @@ function AppHeader({ onAdd }) {
       <h1>todos</h1>
       <SearchPanel onAdd={onAdd} />
     </header>
-  );
+  )
 }
 
-export default AppHeader;
+export default AppHeader

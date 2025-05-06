@@ -1,6 +1,6 @@
-import './NewTaskForm.css';
+import './NewTaskForm.css'
 
 function NewTaskForm() {
-  return <>NewTaskForm</>;
+  return <>NewTaskForm</>
 }
-export default NewTaskForm;
+export default NewTaskForm
