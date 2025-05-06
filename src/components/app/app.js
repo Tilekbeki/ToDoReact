@@ -1,9 +1,9 @@
-import { useState } from 'react';
+import { useState } from 'react'
 
-import AppHeader from '../AppHeader';
-import TaskList from '../TaskList';
-import Footer from '../Footer';
-import './app.css';
+import AppHeader from '../AppHeader'
+import TaskList from '../TaskList'
+import Footer from '../Footer'
+import './app.css'
 
 function App() {
   const [todoData, setTodoData] = useState([
@@ -28,92 +28,92 @@ function App() {
       isCompleted: false,
       date: new Date('2025-04-24T21:50:00'),
     },
-  ]);
-  const [displayData, setDisplayData] = useState(todoData);
-  const [count, setCount] = useState(todoData.length);
-  const [activeFilter, setActiveFilter] = useState('All');
-  const [lastId, setLastId] = useState(todoData.length);
+  ])
+  const [displayData, setDisplayData] = useState(todoData)
+  const [count, setCount] = useState(todoData.length)
+  const [activeFilter, setActiveFilter] = useState('All')
+  const [lastId, setLastId] = useState(todoData.length)
 
   const toggleProperty = (id, propName) => {
-    const copy = todoData.map((el) => (el.id === id ? { ...el, [propName]: !el[propName] } : el));
+    const copy = todoData.map((el) => (el.id === id ? { ...el, [propName]: !el[propName] } : el))
 
-    setTodoData(copy);
-    setDisplayData(copy);
-  };
+    setTodoData(copy)
+    setDisplayData(copy)
+  }
 
   const onToggleComplete = (id) => {
-    toggleProperty(id, 'isCompleted');
-  };
+    toggleProperty(id, 'isCompleted')
+  }
 
   const onToggleEdit = (id) => {
-    const element = todoData.find((el) => el.id === id);
+    const element = todoData.find((el) => el.id === id)
     if (!element.isCompleted) {
-      toggleProperty(id, 'isEditing');
+      toggleProperty(id, 'isEditing')
     }
-  };
+  }
 
   const onDelete = (id) => {
-    const copy = todoData.filter((el) => el.id !== id);
-    setTodoData(copy);
-    setDisplayData(copy);
-    Counter(copy);
-  };
+    const copy = todoData.filter((el) => el.id !== id)
+    setTodoData(copy)
+    setDisplayData(copy)
+    Counter(copy)
+  }
 
   const onAdd = (newItem) => {
-    const copy = todoData;
-    const newId = lastId + 1;
-    const newData = [...copy, { ...newItem, id: newId }];
+    const copy = todoData
+    const newId = lastId + 1
+    const newData = [...copy, { ...newItem, id: newId }]
 
-    setTodoData(newData);
-    setDisplayData(newData);
-    Counter(newData);
-    setLastId(newId);
-  };
+    setTodoData(newData)
+    setDisplayData(newData)
+    Counter(newData)
+    setLastId(newId)
+  }
 
   const onEdit = (id, newDescr) => {
     const copy = todoData.map((el) => {
       if (el.id === id) {
-        el.descr = newDescr;
-        el.isEditing = false;
+        el.descr = newDescr
+        el.isEditing = false
       }
-      return el;
-    });
+      return el
+    })
 
-    setTodoData(copy);
-    setDisplayData(copy);
-  };
+    setTodoData(copy)
+    setDisplayData(copy)
+  }
 
   const Counter = (arr) => {
-    setCount(arr.length);
-  };
+    setCount(arr.length)
+  }
 
   const onToggleFilter = (category) => {
     if (category === 'All') {
-      setDisplayData(todoData);
-      Counter(todoData);
-      setActiveFilter('All');
-      return;
+      setDisplayData(todoData)
+      Counter(todoData)
+      setActiveFilter('All')
+      return
     }
 
-    const isCompleted = category === 'Completed';
+    const isCompleted = category === 'Completed'
 
     if (isCompleted) {
-      setActiveFilter('Completed');
+      setActiveFilter('Completed')
     } else {
-      setActiveFilter('Active');
+      setActiveFilter('Active')
     }
 
-    setDisplayData(todoData.filter((el) => el.isCompleted === isCompleted));
-    Counter(todoData.filter((el) => el.isCompleted === isCompleted));
-  };
+    setDisplayData(todoData.filter((el) => el.isCompleted === isCompleted))
+    Counter(todoData.filter((el) => el.isCompleted === isCompleted))
+  }
 
   const onDeleteByCompleted = () => {
-    const copy = todoData.filter((el) => !el.isCompleted);
-    setTodoData(copy);
-    setDisplayData(copy);
-    Counter(copy);
-  };
-
+    const copy = todoData.filter((el) => !el.isCompleted)
+    setTodoData(copy)
+    setDisplayData(copy)
+    Counter(copy)
+  }
+  console.log('hui')
   return (
     <div className="todoapp">
       <AppHeader toDo={1} done={3} onAdd={onAdd} />
@@ -133,6 +133,6 @@ function App() {
         onToggleFilter={onToggleFilter}
       />
     </div>
-  );
+  )
 }
-export default App;
+export default App
