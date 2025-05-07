@@ -8,21 +8,21 @@ import './app.css'
 function App() {
   const [todoData, setTodoData] = useState([
     {
-      id: 'a',
+      id: '1',
       descr: 'Отжюмания',
       isEditing: false,
       isCompleted: false,
       date: new Date('2025-04-24T20:24:00'),
     },
     {
-      id: 'b',
+      id: '2',
       descr: 'Пресс качат',
       isEditing: false,
       isCompleted: false,
       date: new Date('2025-04-24T21:44:00'),
     },
     {
-      id: 'c',
+      id: '3',
       descr: 'Duolingo урок',
       isEditing: false,
       isCompleted: false,
