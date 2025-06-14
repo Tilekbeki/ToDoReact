@@ -1,9 +1,11 @@
 import { formatDistanceToNowStrict } from 'date-fns'
 import PropTypes from 'prop-types'
+
 import './Task.css'
+import Timer from '../Timer/Timer'
 
 function Task(props) {
-  const { id, descr, status, onToggleComplete, onToggleEdit, onDelete, date } = props
+  const { id, descr, status, onToggleComplete, onToggleEdit, onDelete, date, timer, updateTaskTimer } = props
 
   return (
     <div className="view">
@@ -20,6 +22,12 @@ function Task(props) {
       </label>
       <button className="icon icon-edit" onClick={() => onToggleEdit(id)} />
       <button className="icon icon-destroy" onClick={() => onDelete(id)} />
+      <Timer
+        seconds={timer.seconds}
+        isRunning={timer.isRunning}
+        onToggle={() => updateTaskTimer(id, { isRunning: !timer.isRunning })}
+        onTick={() => updateTaskTimer(id, { seconds: timer.seconds + 1 })}
+      />
     </div>
   )
 }

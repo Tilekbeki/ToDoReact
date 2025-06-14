@@ -13,6 +13,10 @@ function App() {
       isEditing: false,
       isCompleted: false,
       date: new Date('2025-04-24T20:24:00'),
+      timer: {
+        seconds: 0,
+        isRunning: false,
+      },
     },
     {
       id: '2',
@@ -20,6 +24,10 @@ function App() {
       isEditing: false,
       isCompleted: false,
       date: new Date('2025-04-24T21:44:00'),
+      timer: {
+        seconds: 0,
+        isRunning: false,
+      },
     },
     {
       id: '3',
@@ -27,6 +35,10 @@ function App() {
       isEditing: false,
       isCompleted: false,
       date: new Date('2025-04-24T21:50:00'),
+      timer: {
+        seconds: 0,
+        isRunning: false,
+      },
     },
   ])
   const [displayData, setDisplayData] = useState(todoData)
@@ -62,7 +74,17 @@ function App() {
   const onAdd = (newItem) => {
     const copy = todoData
     const newId = lastId + 1
-    const newData = [...copy, { ...newItem, id: newId }]
+    const newData = [
+      ...copy,
+      {
+        ...newItem,
+        id: newId,
+        timer: {
+          seconds: 0,
+          isRunning: false,
+        },
+      },
+    ]
 
     setTodoData(newData)
     setDisplayData(newData)
@@ -113,7 +135,15 @@ function App() {
     setDisplayData(copy)
     Counter(copy)
   }
-  console.log('hui')
+  const updateTaskTimer = (id, newTimerData) => {
+    console.log(newTimerData)
+    setTodoData((prev) =>
+      prev.map((task) => (task.id === id ? { ...task, timer: { ...task.timer, ...newTimerData } } : task))
+    )
+    setDisplayData((prev) =>
+      prev.map((task) => (task.id === id ? { ...task, timer: { ...task.timer, ...newTimerData } } : task))
+    )
+  }
   return (
     <div className="todoapp">
       <AppHeader toDo={1} done={3} onAdd={onAdd} />
@@ -124,6 +154,7 @@ function App() {
           todos={displayData}
           onToggleComplete={onToggleComplete}
           onToggleEdit={onToggleEdit}
+          updateTaskTimer={updateTaskTimer}
         />
       </main>
       <Footer

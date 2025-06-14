@@ -1,7 +1,7 @@
 import Task from '../Task'
 import './TaskList.css'
 
-function TaskList({ todos, onToggleComplete, onToggleEdit, onDelete, onEdit }) {
+function TaskList({ todos, onToggleComplete, onToggleEdit, onDelete, onEdit, updateTaskTimer }) {
   function EditingInput({ descr, id = 0 }) {
     return <input type="text" className="edit" defaultValue={descr} onKeyDown={(e) => handleKeyPress(e, id)} />
   }
@@ -13,7 +13,7 @@ function TaskList({ todos, onToggleComplete, onToggleEdit, onDelete, onEdit }) {
   const elements = todos
     .filter((item) => item && item.id) // Skip invalid items
     .map((item) => {
-      const { id, descr, isCompleted, isEditing, date } = item
+      const { id, descr, isCompleted, isEditing, date, timer } = item
       let classStyled
       if (isEditing) classStyled = 'editing'
       if (isCompleted) classStyled = 'completed'
@@ -27,6 +27,8 @@ function TaskList({ todos, onToggleComplete, onToggleEdit, onDelete, onEdit }) {
             onToggleEdit={onToggleEdit}
             onDelete={onDelete}
             date={date}
+            timer={timer}
+            updateTaskTimer={updateTaskTimer}
           />
           {isEditing ? <EditingInput descr={descr} id={id} /> : null}
         </li>
