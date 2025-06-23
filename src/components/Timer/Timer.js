@@ -1,12 +1,23 @@
 import { useEffect, useRef } from 'react'
 import './Timer.css'
+
 const Timer = ({ seconds, isRunning, onToggle, onTick }) => {
   const intervalRef = useRef(null)
+  const secondsRef = useRef(seconds)
+
+  // обновляем ссылку на секунды при каждом ререндере
+  useEffect(() => {
+    secondsRef.current = seconds
+  }, [seconds])
 
   useEffect(() => {
     if (isRunning) {
       intervalRef.current = setInterval(() => {
-        onTick() // но тут будет замыкание на старый timer.seconds!
+        if (secondsRef.current > 0) {
+          onTick()
+        } else {
+          clearInterval(intervalRef.current)
+        }
       }, 1000)
     } else {
       clearInterval(intervalRef.current)
@@ -16,6 +27,7 @@ const Timer = ({ seconds, isRunning, onToggle, onTick }) => {
   }, [isRunning, onTick])
 
   const formatTime = () => {
+    console.log(seconds)
     const mins = Math.floor(seconds / 60)
     const secs = seconds % 60
     return `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`

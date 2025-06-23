@@ -17,7 +17,7 @@
     content: '⏸';
     display: flex;
     margin-top: -5px;
-    font-size: 20px;
+    font-size: 18px;
     align-items: center;
 }
 
@@ -25,7 +25,7 @@
     content: '▶';
     display: flex;
     margin-top: -5px;
-    font-size: 20px;
+    font-size: 18px;
     align-items: center;
 }
 
@@ -34,4 +34,23 @@
     justify-content: center;
     align-items: end;
     font-size: 18px;
+}
+
+.todo-list li .icon-pause,
+.todo-list li .icon-play {
+	font-size: 18px;
+	width: 18px;
+	height: 18px;
+}
+
+.todo-list li .icon-play {
+	font-size: 15px;
+}
+
+.icon-pause:after {
+	content: '⏸';
+}
+
+.icon-play:after {
+	content: '▶';
 }

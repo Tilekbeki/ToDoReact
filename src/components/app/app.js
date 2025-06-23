@@ -79,10 +79,6 @@ function App() {
       {
         ...newItem,
         id: newId,
-        timer: {
-          seconds: 0,
-          isRunning: false,
-        },
       },
     ]
 

@@ -1,4 +1,4 @@
-import SearchPanel from '../SearchPanel/SearchPanel'
+import SearchPanel from '../CreateForm/SearchPanel'
 import './AppHeader.css'
 
 function AppHeader({ onAdd }) {
